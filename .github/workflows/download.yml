@@ -1,10 +1,10 @@
-name: Download Artifact
+name: Download And Save
 
 on:
   workflow_dispatch:
 
 jobs:
-  test:
+  save:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,13 +13,22 @@ jobs:
       - name: Install gdown
         run: pip install gdown
 
-      - name: Download file
+      - name: Download
         run: |
           mkdir data
           cd data
           gdown "https://drive.google.com/uc?id=1IDJyqTIgRpIiIPmiVRuEtNh6msuUQKwr"
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: downloaded-file
-          path: data/
+
+      - name: Move into repo
+        run: |
+          mkdir -p downloads
+          mv data/* downloads/
+
+      - name: Commit to repository
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add downloads/
+          git commit -m "Add downloaded file"
+          git push
