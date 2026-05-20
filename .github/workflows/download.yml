@@ -1,4 +1,4 @@
-name: Download And Commit
+name: Download and Release File
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,16 +22,19 @@ jobs:
           cd data
           gdown "https://drive.google.com/uc?id=1IDJyqTIgRpIiIPmiVRuEtNh6msuUQKwr"
 
-      - name: Move file into repo
+      - name: Move file to workspace
         run: |
-          mkdir -p downloads
-          mv data/* downloads/
+          mkdir release_files
+          mv data/* release_files/
 
-      - name: Commit & push
+      - name: Create Git tag
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git tag v1.0.0
+          git push origin v1.0.0
 
-          git add downloads/
-          git commit -m "Add downloaded file" || echo "No changes"
-          git push
+      - name: Create GitHub Release and upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: "Auto Release v1.0.0"
+          files: release_files/*
