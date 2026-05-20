@@ -1,10 +1,13 @@
-name: Download And Save
+name: Download And Commit
 
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  save:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,22 +16,22 @@ jobs:
       - name: Install gdown
         run: pip install gdown
 
-      - name: Download
+      - name: Download file
         run: |
           mkdir data
           cd data
           gdown "https://drive.google.com/uc?id=1IDJyqTIgRpIiIPmiVRuEtNh6msuUQKwr"
 
-      - name: Move into repo
+      - name: Move file into repo
         run: |
           mkdir -p downloads
           mv data/* downloads/
 
-      - name: Commit to repository
+      - name: Commit & push
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
           git add downloads/
-          git commit -m "Add downloaded file"
+          git commit -m "Add downloaded file" || echo "No changes"
           git push
