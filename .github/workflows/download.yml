@@ -1,10 +1,10 @@
-name: Fetch Drive Artifact
+name: Download Artifact
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,14 +13,14 @@ jobs:
       - name: Install gdown
         run: pip install gdown
 
-      - name: Download Google Drive file
+      - name: Download file
         run: |
           mkdir data
           cd data
-          gdown.download('https://drive.google.com/file/d/1IDJyqTIgRpIiIPmiVRuEtNh6msuUQKwr/view?usp=drive_link', quiet=True, use_cookies=False)
+          gdown --fuzzy "https://drive.google.com/file/d/1IDJyqTIgRpIiIPmiVRuEtNh6msuUQKwr/view?usp=drive_link"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: google-drive-download
+          name: downloaded-file
           path: data/
