@@ -17,7 +17,7 @@ jobs:
         run: |
           mkdir data
           cd data
-          gdown --fuzzy "https://drive.google.com/file/d/1AbCdEfGhIjKlMn/view?usp=sharing"
+          gdown --fuzzy "https://drive.google.com/file/d/1AbCEfGhIjKlMn/view?usp=sharing"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
