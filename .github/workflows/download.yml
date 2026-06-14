@@ -20,7 +20,7 @@ jobs:
         run: |
           mkdir data
           cd data
-          gdown "https://drive.google.com/uc?id=1PYVV3H3aXgGxwENNMm8bYAuGlmKys2Im"
+          gdown "https://drive.google.com/uc?id=1MVNATVuv5zzIg72hzGXB8oMAo_-XjOaI"
 
       - name: Move file to workspace
         run: |
@@ -29,12 +29,12 @@ jobs:
 
       - name: Create Git tag
         run: |
-          git tag v1.2.0
-          git push origin v1.2.0
+          git tag v1.3.0
+          git push origin v1.3.0
 
       - name: Create GitHub Release and upload asset
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.2.0
-          name: "Auto Release v1.2.0"
+          tag_name: v1.3.0
+          name: "Auto Release v1.3.0"
           files: release_files/*
