@@ -1,25 +1,36 @@
 c=0
 
-# t_n = 5
-s=0
+for x in range(2,1000001):
+	for r in range(2,x):
+		if x%r==0:
+			break
+	else:
+		print('-----------')
+		print(x)
+		p=x
 
-cc =1
-while True:
-    for z in range(1,cc+1):
-        s+=z
-    # print(s)
 
-    for x in range(1,s+1):
-        if s%x==0:
-            c+=1
-    # print(c)
+		for xx in range(2,1000001):
+			for rr in range(2,xx):
+				if xx%rr==0:
+					break
+			else:
+				p=p-xx
+				c=c+1
+				if p<0:
+					c=c-1
+					break
+				# elif p==1:
+				# 	c-=1
+				else:
+					for rrr in range(2,p):
+						if p%rrr==0:
+							break
+					else:
+						# print('found',x)
+						pass
 
-    if (c)>500:
-        print(s)
-        break
-
-    c=0
-    s=0
-    x=0
-    z=0
-    cc+=1
+		print('count',c)
+		print('-----------')
+	c=0
+	
