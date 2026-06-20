@@ -29,12 +29,12 @@ jobs:
 
       - name: Create Git tag
         run: |
-          git tag v2
-          git push origin v2
+          git tag v2.0
+          git push origin v2.0
 
       - name: Create GitHub Release and upload asset
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v2
-          name: "Auto Release v2
+          tag_name: v2.0
+          name: "Auto Release v2.0
           files: release_files/*
