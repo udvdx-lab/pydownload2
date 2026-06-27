@@ -20,7 +20,7 @@ jobs:
         run: |
           mkdir data
           cd data
-          gdown "https://drive.google.com/uc?id=108djP3Ki0zzaN7IPZgoZEn3NzRddZfct"
+          gdown "https://drive.google.com/uc?id=1MUMGWfqau-vp8DdiIjTo2brEc8rwWDgA"
 
       - name: Move file to workspace
         run: |
